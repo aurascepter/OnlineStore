@@ -1,11 +1,14 @@
 public class Book extends ItemForSale
 {
 String publisherOfBook;
-
-
+String authorName;
+String nameOfItem;
 
 
 }
+
+
+
     //You will need to include the following information to be stored in the inheritance heiarchy using the other classes:
       //name of thing being sold
       //price for things that are on sale

@@ -1,29 +1,41 @@
-import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Main
-{
-   //Your tests go here! I expect you to make sure various parts of your program work. 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-     public static void main(String[] args)
-     {
-      Scanner myObj = new Scanner(System.in);
-      String itemName = myObj.nextLine();
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(
+            new InputStreamReader(System.in)
+        );
+
         Store s = new Store();
         Book b = new Book();
-        System.out.println(b instanceof ItemForSale);
-
-      if (itemName.equals("showItems")) {
-
-         s.showItems();
-
-      }
-      else if (itemName.equals("addItem")) {
-
-         s.addItem(itemName);
-
-      }
-
         
-     }
+        //Input must be either a movie (Star Wars, Jumanji, or Obsession),
+        //Input could also be a book (The Great Gatsby, Frankenstein)
+        System.out.println("What do you want to add, sell");
+
+        String input = reader.readLine();
+
+        while (input != null && !input.equals("exit")) {
+
+            if (input.equals("showItems")) {
+                System.out.println(s.showItems());
+            }
+            else if (input.contains("addItem")) {
+                System.out.println("adding " + s.addItem(input.substring(8)));
+            }
+            else if (input.startsWith("sellItem ")) {
+               String itemName = input.substring(9).trim();
+               s.sellItem(itemName);
+
+            }
+            else if (input.equals("creator")) {
+                // Add creator logic here
+            }
+
+            input = reader.readLine();
+        }
+    }
 }

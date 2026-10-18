@@ -1,11 +1,18 @@
-public class ItemForSale  
-{
-int price; 
-String nameOfItem;
-String creatorName;
-String dateOfItemOnsale;
+public class ItemForSale {
+    String nameOfItem;
+    String creatorName;
+    String dateOfItemOnsale;
+    double priceOfItem;
 
+    public ItemForSale(String name, String creator,
+                       String date, double price) {
+        nameOfItem = name;
+        creatorName = creator;
+        dateOfItemOnsale = date;
+        priceOfItem = price;
+    }
 }
+
     //You will need to include the following information to be stored in the inheritance heiarchy using the other classes:
       //name of thing being sold
       //price for things that are on sale

@@ -2,10 +2,17 @@ public class Movie extends ItemForSale
 {
 String movieDuration;
 
+public Movie(String duration) {
 
-
+movieDuration = duration;
 
 }
+
+}
+
+Movie Obsession = new Movie("1:49:00");
+Movie StarWars = new Movie("2:14:00");
+
     //You will need to include the following information to be stored in the inheritance heiarchy using the other classes:
       //name of thing being sold
       //price for things that are on sale

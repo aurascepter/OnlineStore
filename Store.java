@@ -25,6 +25,12 @@
  import java.util.ArrayList;
 public class Store
 {
+  ItemForSale Frankenstein = new ItemForSale("Frankenstein", "Mary Shelley", "1826", 6.0);
+  ItemForSale GreatGatsby = new ItemForSale("The Great Gatsby", "Scott Fitzgerald", "1925", 9.0);
+  ItemForSale StarWars = new ItemForSale("Star Wars", "George Lucas", "1977", 13.00);
+  ItemForSale Jumanji = new ItemForSale("Jumanji", "Chris Van Allsburg", "1981", 15.00);
+  ItemForSale Obsession = new ItemForSale("Obsession", "Curry Barker", "2026", 25.00);
+
   double profitAmount;
   ArrayList<String> items;
 
@@ -33,29 +39,61 @@ public class Store
     items = new ArrayList<String>();
   }
 
-  public void showItems() {
+  public ArrayList<String> showItems() {
 
-    System.out.print(items);
-
-
-  }
-
-  public void addItem(String item) {
-      
-    items.add(item);
-
+    return items;
 
   }
 
-  public void sellItem(String itemName) {
+  public String addItem(String item) {
     
+    if (item.equals("Frankenstein") || item.equals("The Great Gatsby") 
+    || item.equals("Star Wars") || item.equals("Jumanji") || item.equals("Obsession"))
+   items.add(item);
+    return item;
+
+  }
+
+  public void sellItem(String itemName, double profit) {
+    
+    if (itemName.equals("Frankenstein") || itemName.equals("The Great Gatsby") || itemName.equals("Star Wars") 
+      || itemName.equals("Jumanji") || itemName.equals("Obsession")) {
+    for (int i = 0; i < items.size(); i++) {
+      if (items.get(i).equals(itemName)) {
+
+         items.remove(i);
+
+         if (itemName.equals("Frankenstein")) {
+          profitAmount += Frankenstein.priceOfItem;
+         }
+         else if (itemName.equals("The Great Gatsby")) {
+          profitAmount += GreatGatsby.priceOfItem;
+         }
+         else if (itemName.equals("Star Wars")) {
+          profitAmount += StarWars.priceOfItem;
+         }
+         else if (itemName.equals("Jumanji")) {
+          profitAmount += Jumanji.priceOfItem;
+
+         }
+         else if (itemName.equals("Obsession")) {
+          profitAmount += Obsession.priceOfItem;
+
+         }
 
 
+         return;
+      }
+    }
+   
+  }
   }
 
   public void creator(String itemName) {
 
-
+    if (itemName.equals("Frankenstein")) {
+      System.out.println(Frankenstein.creatorName);
+    }
 
     
   }
