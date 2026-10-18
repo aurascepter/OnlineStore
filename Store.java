@@ -1,101 +1,109 @@
-/*Implement the following functionality into the store:
 
-  instance variables: 
-    profit: how much money the store has made
-    items:  instance variable (could be an array or LinkedList or ArrayList of one of the other classes)
+import java.util.ArrayList;
+import java.time.LocalDate;
 
-  methods:
-    showItems: displays all items available for sale
-    addItem: adds an item for sale
-    sellItem(itemName): removes the item from the store and adds its price to profit
-    creator(itemName): displays who created the item in question
+public class Store {
+    private ArrayList<ItemForSale> catalog;
+    private ArrayList<ItemForSale> items;
+    private double profitAmount;
 
-    You will need to include the following information to be stored in the inheritance heiarchy using the other classes:
-      name of thing being sold
-      price for things that are on sale
-      names of creators of movies and books
-      date of birth of book authors
-      date that things are placed on sale
-      duration of movies
-      publisher of books
+    public Store() {
+        catalog = new ArrayList<>();
+        items = new ArrayList<>();
+        profitAmount = 0.0;
 
-    Where these variables are stored and how to name them is up to you!
-*/
+        String saleDate = LocalDate.now().toString();
 
- import java.util.ArrayList;
-public class Store
-{
-  ItemForSale Frankenstein = new ItemForSale("Frankenstein", "Mary Shelley", "1826", 6.0);
-  ItemForSale GreatGatsby = new ItemForSale("The Great Gatsby", "Scott Fitzgerald", "1925", 9.0);
-  ItemForSale StarWars = new ItemForSale("Star Wars", "George Lucas", "1977", 13.00);
-  ItemForSale Jumanji = new ItemForSale("Jumanji", "Chris Van Allsburg", "1981", 15.00);
-  ItemForSale Obsession = new ItemForSale("Obsession", "Curry Barker", "2026", 25.00);
+        // Books
+        Author maryShelley =
+                new Author("Mary Shelley", "1797");
+        Author scottFitzgerald =
+                new Author("F. Scott Fitzgerald", "1896");
+        Author chrisVanAllsburg =
+                new Author("Chris Van Allsburg", "1949");
 
-  double profitAmount;
-  ArrayList<String> items;
+        catalog.add(new Book(
+                "Frankenstein", maryShelley,
+                "Lackington, Hughes, Harding, Mavor & Jones",
+                saleDate, 6.00));
 
-  public Store() {
-    profitAmount = 0;
-    items = new ArrayList<String>();
-  }
+        catalog.add(new Book(
+                "The Great Gatsby", scottFitzgerald,
+                "Charles Scribner's Sons",
+                saleDate, 9.00));
 
-  public ArrayList<String> showItems() {
+        catalog.add(new Book(
+                "Jumanji", chrisVanAllsburg,
+                "Houghton Mifflin",
+                saleDate, 15.00));
 
-    return items;
+        // Movies
+        catalog.add(new Movie(
+                "Star Wars", "George Lucas",
+                121, saleDate, 13.00));
 
-  }
-
-  public String addItem(String item) {
-    
-    if (item.equals("Frankenstein") || item.equals("The Great Gatsby") 
-    || item.equals("Star Wars") || item.equals("Jumanji") || item.equals("Obsession"))
-   items.add(item);
-    return item;
-
-  }
-
-  public void sellItem(String itemName, double profit) {
-    
-    if (itemName.equals("Frankenstein") || itemName.equals("The Great Gatsby") || itemName.equals("Star Wars") 
-      || itemName.equals("Jumanji") || itemName.equals("Obsession")) {
-    for (int i = 0; i < items.size(); i++) {
-      if (items.get(i).equals(itemName)) {
-
-         items.remove(i);
-
-         if (itemName.equals("Frankenstein")) {
-          profitAmount += Frankenstein.priceOfItem;
-         }
-         else if (itemName.equals("The Great Gatsby")) {
-          profitAmount += GreatGatsby.priceOfItem;
-         }
-         else if (itemName.equals("Star Wars")) {
-          profitAmount += StarWars.priceOfItem;
-         }
-         else if (itemName.equals("Jumanji")) {
-          profitAmount += Jumanji.priceOfItem;
-
-         }
-         else if (itemName.equals("Obsession")) {
-          profitAmount += Obsession.priceOfItem;
-
-         }
-
-
-         return;
-      }
-    }
-   
-  }
-  }
-
-  public void creator(String itemName) {
-
-    if (itemName.equals("Frankenstein")) {
-      System.out.println(Frankenstein.creatorName);
+        catalog.add(new Movie(
+                "Obsession", "Curry Barker",
+                0, saleDate, 25.00));
     }
 
-    
-  }
+    public String showItems() {
+        if (items.isEmpty()) {
+            return "No items are currently available.";
+        }
 
+        String result = "Items available for sale:\n";
+
+        for (ItemForSale item : items) {
+            result += item.toString() + "\n";
+        }
+
+        return result;
+    }
+
+    public String addItem(String itemName) {
+        for (ItemForSale item : catalog) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                for (ItemForSale available : items) {
+                    if (available.getName().equalsIgnoreCase(itemName)) {
+                        return itemName + " is already available.";
+                    }
+                }
+
+                items.add(item);
+                return itemName + " added successfully.";
+            }
+        }
+
+        return "Item not recognized.";
+    }
+
+    public boolean sellItem(String itemName) {
+        for (int i = 0; i < items.size(); i++) {
+            ItemForSale item = items.get(i);
+
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                profitAmount += item.getPrice();
+                items.remove(i);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public String creator(String itemName) {
+        for (ItemForSale item : catalog) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return "Creator of " + item.getName() + ": "
+                        + item.getCreatorName();
+            }
+        }
+
+        return "Item not recognized.";
+    }
+
+    public double getProfitAmount() {
+        return profitAmount;
+    }
 }

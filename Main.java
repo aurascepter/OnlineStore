@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,32 +9,41 @@ public class Main {
         );
 
         Store s = new Store();
-        Book b = new Book();
-        
-        //Input must be either a movie (Star Wars, Jumanji, or Obsession),
-        //Input could also be a book (The Great Gatsby, Frankenstein)
-        System.out.println("What do you want to add, sell");
 
-        String input = reader.readLine();
+        System.out.println(
+            "Enter addItem <name>, sellItem <name>, " +
+            "showItems, creator <name>, or exit:"
+        );
 
-        while (input != null && !input.equals("exit")) {
+        String input;
+
+        while ((input = reader.readLine()) != null
+                && !input.equals("exit")) {
 
             if (input.equals("showItems")) {
                 System.out.println(s.showItems());
-            }
-            else if (input.contains("addItem")) {
-                System.out.println("adding " + s.addItem(input.substring(8)));
-            }
-            else if (input.startsWith("sellItem ")) {
-               String itemName = input.substring(9).trim();
-               s.sellItem(itemName);
 
-            }
-            else if (input.equals("creator")) {
-                // Add creator logic here
-            }
+            } else if (input.startsWith("addItem ")) {
+                String itemName = input.substring(8).trim();
+                System.out.println(s.addItem(itemName));
 
-            input = reader.readLine();
+            } else if (input.startsWith("sellItem ")) {
+                String itemName = input.substring(9).trim();
+
+                if (s.sellItem(itemName)) {
+                    System.out.println(itemName + " sold successfully. Profit is now " + s.getProfitAmount());
+                } else {
+                    System.out.println(itemName + " is not available.");
+                }
+
+            } else if (input.startsWith("creator ")) {
+                String itemName = input.substring(8).trim();
+                s.creator(itemName);
+
+            } else {
+                System.out.println("Unknown command.");
+            }
+            System.out.println("Enter another command or exit:");
         }
     }
 }

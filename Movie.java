@@ -1,25 +1,29 @@
-public class Movie extends ItemForSale
-{
-String movieDuration;
 
-public Movie(String duration) {
+public class Movie extends ItemForSale {
+    private String creatorName;
+    private int durationMinutes;
 
-movieDuration = duration;
+    public Movie(String name, String creatorName,
+                 int durationMinutes, String datePlacedOnSale,
+                 double priceOfItem) {
+        super(name, priceOfItem, datePlacedOnSale);
+        this.creatorName = creatorName;
+        this.durationMinutes = durationMinutes;
+    }
 
+    public int getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    @Override
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()
+                + " | Creator: " + creatorName
+                + " | Duration: " + durationMinutes + " minutes";
+    }
 }
-
-}
-
-Movie Obsession = new Movie("1:49:00");
-Movie StarWars = new Movie("2:14:00");
-
-    //You will need to include the following information to be stored in the inheritance heiarchy using the other classes:
-      //name of thing being sold
-      //price for things that are on sale
-      //names of creators of movies and books
-      //date of birth of book authors
-      //date that things are placed on sale
-      //duration of movies
-      //publisher of books
-
-    //Where these variables are stored and how to name them is up to you!

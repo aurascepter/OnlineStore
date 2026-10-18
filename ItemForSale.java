@@ -1,27 +1,34 @@
-public class ItemForSale {
-    String nameOfItem;
-    String creatorName;
-    String dateOfItemOnsale;
-    double priceOfItem;
 
-    public ItemForSale(String name, String creator,
-                       String date, double price) {
-        nameOfItem = name;
-        creatorName = creator;
-        dateOfItemOnsale = date;
-        priceOfItem = price;
+public class ItemForSale {
+    protected String name;
+    protected double priceOfItem;
+    protected String datePlacedOnSale;
+
+    public ItemForSale(String name, double priceOfItem,
+                       String datePlacedOnSale) {
+        this.name = name;
+        this.priceOfItem = priceOfItem;
+        this.datePlacedOnSale = datePlacedOnSale;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return priceOfItem;
+    }
+
+    public String getDatePlacedOnSale() {
+        return datePlacedOnSale;
+    }
+
+    public String getCreatorName() {
+        return "Creator information unavailable";
+    }
+
+    @Override
+    public String toString() {
+        return name + " - $" + String.format("%.2f", priceOfItem);
     }
 }
-
-    //You will need to include the following information to be stored in the inheritance heiarchy using the other classes:
-      //name of thing being sold
-      //price for things that are on sale
-      //names of creators of movies and books
-      //date of birth of book authors
-      //date that things are placed on sale
-      //duration of movies
-      //publisher of books
-
-    //Where these variables are stored and how to name them is up to you!
-
-    

@@ -1,21 +1,32 @@
-public class Book extends ItemForSale
-{
-String publisherOfBook;
-String authorName;
-String nameOfItem;
 
+public class Book extends ItemForSale {
+    private Author author;
+    private String publisher;
 
+    public Book(String name, Author author, String publisher,
+                String datePlacedOnSale, double priceOfItem) {
+        super(name, priceOfItem, datePlacedOnSale);
+        this.author = author;
+        this.publisher = publisher;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    @Override
+    public String getCreatorName() {
+        return author.getName();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()
+                + " | Author: " + author.getName()
+                + " | Publisher: " + publisher;
+    }
 }
-
-
-
-    //You will need to include the following information to be stored in the inheritance heiarchy using the other classes:
-      //name of thing being sold
-      //price for things that are on sale
-      //names of creators of movies and books
-      //date of birth of book authors
-      //date that things are placed on sale
-      //duration of movies
-      //publisher of books
-
-    //Where these variables are stored and how to name them is up to you!
